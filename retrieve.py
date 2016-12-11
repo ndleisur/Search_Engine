@@ -57,7 +57,10 @@ def most(argv):
             #print 'Showing the top ' + str(len(hits)) + ' hits:'
         i=25
         j=len(hits) - 1
-        hits = sorted(hits, key=lambda hit: hit[2], reverse=True)[:10]
+        if len(hits) > 15:
+            hits = sorted(hits, key=lambda hit: hit[2], reverse=True)[:15]
+        else:
+            hits = sorted(hits, key=lambda hit: hit[2], reverse=True)[:15]
         #print "hits: " + str(hits)
         return hits
         while i > 0 and j > -1:

@@ -14,14 +14,21 @@ from nltk.stem.porter import PorterStemmer
 # Base of the html content
 CONTENT = """
 <html>
+<head>
 <title>Interactive Page</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
 <body>
-<center>
-<br/><br/><br/><br/> 
-    <h1>Find Killer Whales</h1>
+<container>
+<div class="col-xs-offset-2 col-xs-6">
+<div style="position:fixed;background-color:white;width:700px;">
+    <a href="index.html" style="color:black;"><h1>Find Killer Whales</h1></a>
     <form method=POST action="myscript.cgi">
-        <P><B>Your last query is "%s" </B>
+        <P><B>Your latest query is "%s" </B>
     </form>
+</div>
+<br/><br/><br/><br/>
     <h2>Results</h2>
     %s
     <form method=POST action="myscript.cgi">
@@ -29,7 +36,8 @@ CONTENT = """
         <P><input type=text name=query>
         <P><input type=submit>
     </form>
-</center>
+</div>
+</container>
 </body>
 </html>
 """
@@ -38,8 +46,8 @@ CONTENT = """
 def format_results(results):
     # join hyperlink tags with newlines
     return '\n'.join(
-        '<a id="result" href="%s">%s</a><br><p>Similarity Score: %s</p>' % (url[1], url[0], url[2])
-        for url in results
+        '<a id="result" href="%s">%d. %s</a><br><p>Similarity Score: %s</p>' % (url[1], idx + 1, url[0], url[2])
+        for idx, url in enumerate(results)
     )
 
 
